@@ -1,0 +1,36 @@
+
+[ 2024-09-20 03:04:13.880321 ] Exception: ERROR: Failed to connect database!MySQL Error Code is '-1'
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 513, in firstThingsFirst
+    db = configs.mysql.connector.connect(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/__init__.py", line 179, in connect
+    return MySQLConnection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 95, in __init__
+    self.connect(**kwargs)
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/abstracts.py", line 716, in connect
+    self._open_connection()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 208, in _open_connection
+    self._do_auth(self._user, self._password,
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 137, in _do_auth
+    packet = self._protocol.make_auth(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/protocol.py", line 99, in make_auth
+    packet += self._auth_response(client_flags, username, password,
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/protocol.py", line 58, in _auth_response
+    auth = get_auth_plugin(auth_plugin)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/authentication.py", line 190, in get_auth_plugin
+    raise errors.NotSupportedError(
+mysql.connector.errors.NotSupportedError: Authentication plugin 'caching_sha2_password' is not supported
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/__init__.py", line 10, in run
+    fn.firstThingsFirst()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 533, in firstThingsFirst
+    raise Exception(lang_dict['error_failed_to_connect_database'] + 'MySQL Error Code is \'' + str(err.errno) + '\'')

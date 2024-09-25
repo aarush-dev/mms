@@ -1,0 +1,116 @@
+
+[ 2024-09-03 04:06:52.879548 ] Exception: ERROR: Failed to connect database!MySQL Error Code is '1698'
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 513, in firstThingsFirst
+    db = configs.mysql.connector.connect(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/__init__.py", line 179, in connect
+    return MySQLConnection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 95, in __init__
+    self.connect(**kwargs)
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/abstracts.py", line 716, in connect
+    self._open_connection()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 208, in _open_connection
+    self._do_auth(self._user, self._password,
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 144, in _do_auth
+    self._auth_switch_request(username, password)
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 177, in _auth_switch_request
+    raise errors.get_exception(packet)
+mysql.connector.errors.ProgrammingError: 1698 (28000): Access denied for user 'root'@'localhost'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/__init__.py", line 10, in run
+    fn.firstThingsFirst()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 533, in firstThingsFirst
+    raise Exception(lang_dict['error_failed_to_connect_database'] + 'MySQL Error Code is \'' + str(err.errno) + '\'')
+
+[ 2024-09-03 04:11:57.631222 ] Exception: ERROR: Failed to connect database!MySQL Error Code is '1698'
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 513, in firstThingsFirst
+    db = configs.mysql.connector.connect(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/__init__.py", line 179, in connect
+    return MySQLConnection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 95, in __init__
+    self.connect(**kwargs)
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/abstracts.py", line 716, in connect
+    self._open_connection()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 208, in _open_connection
+    self._do_auth(self._user, self._password,
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 144, in _do_auth
+    self._auth_switch_request(username, password)
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 177, in _auth_switch_request
+    raise errors.get_exception(packet)
+mysql.connector.errors.ProgrammingError: 1698 (28000): Access denied for user 'root'@'localhost'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/__init__.py", line 10, in run
+    fn.firstThingsFirst()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 533, in firstThingsFirst
+    raise Exception(lang_dict['error_failed_to_connect_database'] + 'MySQL Error Code is \'' + str(err.errno) + '\'')
+
+[ 2024-09-03 04:12:35.382432 ] Exception: ERROR: Failed to connect database!MySQL Error Code is '1698'
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 513, in firstThingsFirst
+    db = configs.mysql.connector.connect(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/__init__.py", line 179, in connect
+    return MySQLConnection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 95, in __init__
+    self.connect(**kwargs)
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/abstracts.py", line 716, in connect
+    self._open_connection()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 208, in _open_connection
+    self._do_auth(self._user, self._password,
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 144, in _do_auth
+    self._auth_switch_request(username, password)
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 177, in _auth_switch_request
+    raise errors.get_exception(packet)
+mysql.connector.errors.ProgrammingError: 1698 (28000): Access denied for user 'root'@'localhost'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/__init__.py", line 10, in run
+    fn.firstThingsFirst()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 533, in firstThingsFirst
+    raise Exception(lang_dict['error_failed_to_connect_database'] + 'MySQL Error Code is \'' + str(err.errno) + '\'')
+
+[ 2024-09-03 04:14:11.996217 ] Exception: ERROR: Failed to connect database!MySQL Error Code is '1698'
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 513, in firstThingsFirst
+    db = configs.mysql.connector.connect(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/__init__.py", line 179, in connect
+    return MySQLConnection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 95, in __init__
+    self.connect(**kwargs)
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/abstracts.py", line 716, in connect
+    self._open_connection()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 208, in _open_connection
+    self._do_auth(self._user, self._password,
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 144, in _do_auth
+    self._auth_switch_request(username, password)
+  File "/Users/aarushmahajan/PycharmProjects/mtms/.venv/lib/python3.11/site-packages/mysql/connector/connection.py", line 177, in _auth_switch_request
+    raise errors.get_exception(packet)
+mysql.connector.errors.ProgrammingError: 1698 (28000): Access denied for user 'root'@'localhost'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/__init__.py", line 10, in run
+    fn.firstThingsFirst()
+  File "/Users/aarushmahajan/PycharmProjects/mtms/mtms/src/mtms/base/functions/functions.py", line 533, in firstThingsFirst
+    raise Exception(lang_dict['error_failed_to_connect_database'] + 'MySQL Error Code is \'' + str(err.errno) + '\'')
