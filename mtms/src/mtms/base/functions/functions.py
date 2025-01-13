@@ -373,7 +373,7 @@ def makeErrorLog():
 
 	return fname
 
-def setWorkingLang(dft = False):
+d(dft = False):
 	try:
 		if not dft:
 			langs = configs.__LANG_CHOICES__
@@ -505,7 +505,7 @@ def firstThingsFirst():
 
 	# setting working langauge for current
 	# session as default to show some massages
-	lang_dict = setWorkingLang(True)
+	lang_dict = setWorkingLang(False)
 
 	print('\n' + lang_dict['notice_please_wait_while_performing_checks'])
 
@@ -540,7 +540,7 @@ def firstThingsFirst():
 	# setting working langauge for current
 	# session acc. to user choice
 	if configs.__DEBUG__:
-		lang_dict = setWorkingLang(True)
+		lang_dict = setWorkingLang()
 	else:
 		lang_dict = setWorkingLang()
 

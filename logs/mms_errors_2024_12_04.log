@@ -1,0 +1,7 @@
+
+[ 2024-12-04 16:58:17.994516 ] IndexError: list index out of range
+
+Traceback (most recent call last):
+  File "/home/user/mms/mtms/src/mtms/base/classes/Admin.py", line 445, in viewStationStatus
+    n = d[0][0]
+        ~^^^

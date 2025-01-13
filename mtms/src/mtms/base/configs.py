@@ -1,5 +1,3 @@
-
-
 # importing required modules and methods
 # all dependent modules are impoerted here
 try:
@@ -28,13 +26,12 @@ __PYTHON_PATH__		=	sys.path[4]
 
 __PACKAGE_PATH__	=	os.getcwd()
 __LOGS_PATH__		=	 __PACKAGE_PATH__ + '/logs'
-
-__DB_STRUCT_FILE__		=	__PACKAGE_PATH__ + '/initials/database/mms_struct.sql'
-__DEFAULT_LANG_FILE__	=	__PACKAGE_PATH__ + '/initials/lang/en.json'
+__DB_STRUCT_FILE__		=	__PACKAGE_PATH__ + '/mtms/src/mtms/initials/database/mms_struct.sql'
+__DEFAULT_LANG_FILE__	=	__PACKAGE_PATH__ + '/mtms/src/mtms/initials/lang/en.json'
 
 __REQ_DB_TABLES__ = [('bookings'), ('cards'), ('fare_stations'), ('routes'), ('stations'), ('station_close_status'), ('tokens'), ('transactions'), ('users')]
 
-__LANG_PATH__		=	__PACKAGE_PATH__ + '/lang'
+__LANG_PATH__		=	__PACKAGE_PATH__ + '/mtms/src/mtms/initials/lang/'
 __LANG_CHOICES__ = {
 	'hi'	:	'हिंदी'
 	, 'en'	:	'English'
@@ -58,8 +55,8 @@ except:
 	<python_path>/mms/initials/database/mms_struct.sql file
 """
 # DATABASE INITIALS
-__DB_USER__ = 'rooot'
-__DB_PASS__ = 'rootroot'
+__DB_USER__ = 'root'
+__DB_PASS__ = 'root'
 __DB_HOST__ = 'localhost'
 __DB_NAME__ = 'mms'
 
@@ -77,7 +74,7 @@ __MIN_CARD_RECHARGE_AMOUNT__ = 200
 __MAX_CARD_RECHARGE_AMOUNT__ = 2000
 
 # TIME FOR WHICH ONE CAN STAY AT STATION WHICH BEING ON THE TRAIN
-__IN_STATION_TIME_DIFF__ = '00:20:00'
+__IN_STATION_TIME_DIFF__ = '01:00:00'
 
 # WANT TO USE QR OR NOT
 __USE_QR__ = True

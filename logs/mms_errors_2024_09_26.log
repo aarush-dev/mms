@@ -1,0 +1,72 @@
+
+[ 2024-09-26 18:31:16.733385 ] mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'route_id' in 'field list'
+
+Traceback (most recent call last):
+  File "/home/user/mms/venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 705, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'route_id' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/user/mms/mtms/src/mtms/__init__.py", line 9, in run
+    from base.menu import main_menu
+  File "/home/user/mms/mtms/src/mtms/base/menu/main_menu.py", line 135, in <module>
+    showMenu('customer_menu', customer_view, menu_tree)
+  File "/home/user/mms/mtms/src/mtms/base/menu/main_menu.py", line 101, in showMenu
+    eval(
+  File "<string>", line 1, in <module>
+  File "/home/user/mms/mtms/src/mtms/base/menu/customer_menu.py", line 30, in touch
+    co.onTouch(_id, current_station)['msg']
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/mms/mtms/src/mtms/base/classes/CardOperation.py", line 154, in onTouch
+    return self.__stationEntry(cid, cur_stat)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/mms/mtms/src/mtms/base/classes/CardOperation.py", line 79, in __stationEntry
+    self.__cur.execute(booking_query)
+  File "/home/user/mms/venv/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 357, in execute
+    result = self._connection.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/mms/venv/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/mms/venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 713, in cmd_query
+    raise get_mysql_exception(
+
+[ 2024-09-26 19:11:56.065600 ] mysql.connector.errors.DataError: 1406 (22001): Data too long for column 'route_name' at row 1
+
+Traceback (most recent call last):
+  File "/home/user/mms/venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 705, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data too long for column 'route_name' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/user/mms/mtms/src/mtms/__init__.py", line 9, in run
+    from base.menu import main_menu
+  File "/home/user/mms/mtms/src/mtms/base/menu/main_menu.py", line 141, in <module>
+    showMenu('admin_menu', admin_view, menu_tree)
+  File "/home/user/mms/mtms/src/mtms/base/menu/main_menu.py", line 115, in showMenu
+    showMenu(module, view, tree)
+  File "/home/user/mms/mtms/src/mtms/base/menu/main_menu.py", line 115, in showMenu
+    showMenu(module, view, tree)
+  File "/home/user/mms/mtms/src/mtms/base/menu/main_menu.py", line 115, in showMenu
+    showMenu(module, view, tree)
+  [Previous line repeated 2 more times]
+  File "/home/user/mms/mtms/src/mtms/base/menu/main_menu.py", line 101, in showMenu
+    eval(
+  File "<string>", line 1, in <module>
+  File "/home/user/mms/mtms/src/mtms/base/menu/admin_menu.py", line 98, in renameTheRoute
+    print('\n' + ad.renameRoute(route, new)['msg'])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/mms/mtms/src/mtms/base/classes/Admin.py", line 231, in renameRoute
+    self.__cur.execute(q)
+  File "/home/user/mms/venv/lib/python3.11/site-packages/mysql/connector/cursor_cext.py", line 357, in execute
+    result = self._connection.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/mms/venv/lib/python3.11/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/mms/venv/lib/python3.11/site-packages/mysql/connector/connection_cext.py", line 713, in cmd_query
+    raise get_mysql_exception(

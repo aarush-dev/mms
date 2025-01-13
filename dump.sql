@@ -1,0 +1,297 @@
+-- MySQL dump 10.13  Distrib 8.0.37, for Linux (x86_64)
+--
+-- Host: localhost    Database: mms
+-- ------------------------------------------------------
+-- Server version	8.0.37
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `bookings`
+--
+
+DROP TABLE IF EXISTS `bookings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bookings` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `booking_id` char(36) NOT NULL,
+  `medium_id` char(36) NOT NULL,
+  `medium` char(1) NOT NULL,
+  `stat_start` char(36) DEFAULT NULL,
+  `stat_end` char(36) DEFAULT NULL,
+  `fare` float DEFAULT NULL,
+  `is_started` int NOT NULL DEFAULT '1',
+  `is_complete` int NOT NULL DEFAULT '0',
+  `is_currupt` int NOT NULL DEFAULT '0',
+  `datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `booking_id` (`booking_id`),
+  KEY `fk_bk_stat_id_1` (`stat_start`),
+  KEY `fk_bk_stat_id_2` (`stat_end`),
+  CONSTRAINT `fk_bk_stat_id_1` FOREIGN KEY (`stat_start`) REFERENCES `stations` (`station_id`),
+  CONSTRAINT `fk_bk_stat_id_2` FOREIGN KEY (`stat_end`) REFERENCES `stations` (`station_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bookings`
+--
+
+LOCK TABLES `bookings` WRITE;
+/*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
+INSERT INTO `bookings` VALUES (1,'7264d65b-f68f-4725-8dbf-1d1443039e7e','501e9993-b9f9-4bf5-b58e-19b3433eb7fd','t','7d59b1d6-6803-482f-8e0f-55ad07f743e5','01eba78e-7a6e-457a-a50f-295164749f0e',42,1,0,0,'2024-09-25 23:03:36'),(2,'b7473761-dd8e-400b-902d-7407de3e47a0','44c73a21-69f7-4e91-a5e9-b0cf5af9e0c8','t','01eba78e-7a6e-457a-a50f-295164749f0e','96e4c838-240b-446b-a758-a9e7f3890b34',74,1,0,0,'2024-09-25 23:06:04'),(3,'48c108b7-79bb-46b9-a7ae-c351675704ba','034465d0-328b-429a-bca1-85bad83486ff','t','01eba78e-7a6e-457a-a50f-295164749f0e','96e4c838-240b-446b-a758-a9e7f3890b34',74,1,0,0,'2024-09-25 23:07:35'),(4,'f05b25af-abe1-47d0-84f1-70f164fc1532','a4cc12ed-e55c-4ed2-88b3-287e88aaed95','t','01eba78e-7a6e-457a-a50f-295164749f0e','96e4c838-240b-446b-a758-a9e7f3890b34',74,1,1,0,'2024-09-25 23:11:03'),(5,'55544b4b-0e92-4f3b-a960-efca1d7086c4','381143a5-826e-40f3-8d78-66ae71b93c73','t','01eba78e-7a6e-457a-a50f-295164749f0e','96e4c838-240b-446b-a758-a9e7f3890b34',74,1,1,0,'2024-09-25 23:12:36'),(6,'6e2baa53-7f71-48fa-95c7-3fd75bea0120','3cdc546a-9af6-4a74-95d4-3bbb0c01b5b3','t','01eba78e-7a6e-457a-a50f-295164749f0e','96e4c838-240b-446b-a758-a9e7f3890b34',74,1,1,0,'2024-09-26 06:00:08'),(7,'58af55a7-a2a8-4a61-9198-961c175c6972','2edfc224-b979-43aa-92e1-01d28dbccfad','t','01eba78e-7a6e-457a-a50f-295164749f0e','96e4c838-240b-446b-a758-a9e7f3890b34',74,1,1,0,'2024-09-26 18:26:01'),(8,'c9f4c7ce-264c-429f-9137-94d50e2254e8','d14d997c-c3d3-4efd-8145-65b1c7e9556c','t','96e4c838-240b-446b-a758-a9e7f3890b34','9e5543ea-4dbb-49a5-b97b-1579f0824215',40,1,0,0,'2024-09-26 19:07:04');
+/*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cards`
+--
+
+DROP TABLE IF EXISTS `cards`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cards` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `card_id` varchar(128) NOT NULL,
+  `bal` float NOT NULL DEFAULT '100',
+  `last_book` char(36) DEFAULT NULL,
+  `is_active` int NOT NULL DEFAULT '1',
+  `in_station` int NOT NULL DEFAULT '0',
+  `datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_update` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cards`
+--
+
+LOCK TABLES `cards` WRITE;
+/*!40000 ALTER TABLE `cards` DISABLE KEYS */;
+INSERT INTO `cards` VALUES (1,'e4743622-dc63-4b46-b973-48194e59f002',150,NULL,1,0,'2024-09-26 18:30:13',NULL),(2,'4611f488-ad59-4392-b07b-7e8982a476db',150,NULL,1,0,'2024-09-26 19:13:42',NULL),(3,'ae0c6605-f618-41e3-b4da-4fbec83f20e4',150,NULL,1,0,'2024-09-26 19:14:33',NULL);
+/*!40000 ALTER TABLE `cards` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fare_stations`
+--
+
+DROP TABLE IF EXISTS `fare_stations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `fare_stations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `from_station` char(36) NOT NULL,
+  `to_station` char(36) NOT NULL,
+  `amt` float DEFAULT NULL,
+  `datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=197 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fare_stations`
+--
+
+LOCK TABLES `fare_stations` WRITE;
+/*!40000 ALTER TABLE `fare_stations` DISABLE KEYS */;
+INSERT INTO `fare_stations` VALUES (1,'96e4c838-240b-446b-a758-a9e7f3890b34','01eba78e-7a6e-457a-a50f-295164749f0e',48,'2024-09-25 23:00:10'),(2,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','01eba78e-7a6e-457a-a50f-295164749f0e',42,'2024-09-25 23:00:10'),(3,'01eba78e-7a6e-457a-a50f-295164749f0e','01eba78e-7a6e-457a-a50f-295164749f0e',10,'2024-09-25 23:00:10'),(4,'96e4c838-240b-446b-a758-a9e7f3890b34','7d59b1d6-6803-482f-8e0f-55ad07f743e5',30,'2024-09-25 23:00:10'),(5,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','7d59b1d6-6803-482f-8e0f-55ad07f743e5',10,'2024-09-25 23:00:10'),(6,'01eba78e-7a6e-457a-a50f-295164749f0e','7d59b1d6-6803-482f-8e0f-55ad07f743e5',64,'2024-09-25 23:00:10'),(7,'96e4c838-240b-446b-a758-a9e7f3890b34','96e4c838-240b-446b-a758-a9e7f3890b34',10,'2024-09-25 23:00:10'),(8,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','96e4c838-240b-446b-a758-a9e7f3890b34',94,'2024-09-25 23:00:10'),(9,'01eba78e-7a6e-457a-a50f-295164749f0e','96e4c838-240b-446b-a758-a9e7f3890b34',74,'2024-09-25 23:00:10'),(10,'4482755b-2096-4ce0-b1ed-23dbd286deac','96e4c838-240b-446b-a758-a9e7f3890b34',20,'2024-09-26 18:42:32'),(11,'96e4c838-240b-446b-a758-a9e7f3890b34','4482755b-2096-4ce0-b1ed-23dbd286deac',20,'2024-09-26 18:42:32'),(12,'4482755b-2096-4ce0-b1ed-23dbd286deac','7d59b1d6-6803-482f-8e0f-55ad07f743e5',50,'2024-09-26 18:42:32'),(13,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','4482755b-2096-4ce0-b1ed-23dbd286deac',50,'2024-09-26 18:42:32'),(14,'4482755b-2096-4ce0-b1ed-23dbd286deac','01eba78e-7a6e-457a-a50f-295164749f0e',30,'2024-09-26 18:42:32'),(15,'01eba78e-7a6e-457a-a50f-295164749f0e','4482755b-2096-4ce0-b1ed-23dbd286deac',30,'2024-09-26 18:42:32'),(16,'4482755b-2096-4ce0-b1ed-23dbd286deac','4482755b-2096-4ce0-b1ed-23dbd286deac',10,'2024-09-26 18:42:32'),(17,'3178a96e-a710-4859-b3ef-9713bf2c0632','96e4c838-240b-446b-a758-a9e7f3890b34',70,'2024-09-26 18:44:56'),(18,'96e4c838-240b-446b-a758-a9e7f3890b34','3178a96e-a710-4859-b3ef-9713bf2c0632',70,'2024-09-26 18:44:56'),(19,'3178a96e-a710-4859-b3ef-9713bf2c0632','7d59b1d6-6803-482f-8e0f-55ad07f743e5',60,'2024-09-26 18:44:56'),(20,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','3178a96e-a710-4859-b3ef-9713bf2c0632',60,'2024-09-26 18:44:56'),(21,'3178a96e-a710-4859-b3ef-9713bf2c0632','01eba78e-7a6e-457a-a50f-295164749f0e',30,'2024-09-26 18:44:56'),(22,'01eba78e-7a6e-457a-a50f-295164749f0e','3178a96e-a710-4859-b3ef-9713bf2c0632',30,'2024-09-26 18:44:56'),(23,'3178a96e-a710-4859-b3ef-9713bf2c0632','4482755b-2096-4ce0-b1ed-23dbd286deac',40,'2024-09-26 18:44:56'),(24,'4482755b-2096-4ce0-b1ed-23dbd286deac','3178a96e-a710-4859-b3ef-9713bf2c0632',40,'2024-09-26 18:44:56'),(25,'3178a96e-a710-4859-b3ef-9713bf2c0632','3178a96e-a710-4859-b3ef-9713bf2c0632',10,'2024-09-26 18:44:56'),(26,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','96e4c838-240b-446b-a758-a9e7f3890b34',40,'2024-09-26 18:46:21'),(27,'96e4c838-240b-446b-a758-a9e7f3890b34','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',40,'2024-09-26 18:46:21'),(28,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','7d59b1d6-6803-482f-8e0f-55ad07f743e5',60,'2024-09-26 18:46:21'),(29,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',60,'2024-09-26 18:46:21'),(30,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','01eba78e-7a6e-457a-a50f-295164749f0e',60,'2024-09-26 18:46:21'),(31,'01eba78e-7a6e-457a-a50f-295164749f0e','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',60,'2024-09-26 18:46:21'),(32,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','4482755b-2096-4ce0-b1ed-23dbd286deac',30,'2024-09-26 18:46:21'),(33,'4482755b-2096-4ce0-b1ed-23dbd286deac','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',30,'2024-09-26 18:46:21'),(34,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','3178a96e-a710-4859-b3ef-9713bf2c0632',80,'2024-09-26 18:46:21'),(35,'3178a96e-a710-4859-b3ef-9713bf2c0632','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',80,'2024-09-26 18:46:21'),(36,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',10,'2024-09-26 18:46:21'),(37,'fbce757a-7da3-4093-9034-06671e61ca44','96e4c838-240b-446b-a758-a9e7f3890b34',40,'2024-09-26 18:48:45'),(38,'96e4c838-240b-446b-a758-a9e7f3890b34','fbce757a-7da3-4093-9034-06671e61ca44',40,'2024-09-26 18:48:45'),(39,'fbce757a-7da3-4093-9034-06671e61ca44','7d59b1d6-6803-482f-8e0f-55ad07f743e5',50,'2024-09-26 18:48:45'),(40,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','fbce757a-7da3-4093-9034-06671e61ca44',50,'2024-09-26 18:48:45'),(41,'fbce757a-7da3-4093-9034-06671e61ca44','01eba78e-7a6e-457a-a50f-295164749f0e',60,'2024-09-26 18:48:45'),(42,'01eba78e-7a6e-457a-a50f-295164749f0e','fbce757a-7da3-4093-9034-06671e61ca44',60,'2024-09-26 18:48:45'),(43,'fbce757a-7da3-4093-9034-06671e61ca44','4482755b-2096-4ce0-b1ed-23dbd286deac',80,'2024-09-26 18:48:45'),(44,'4482755b-2096-4ce0-b1ed-23dbd286deac','fbce757a-7da3-4093-9034-06671e61ca44',80,'2024-09-26 18:48:45'),(45,'fbce757a-7da3-4093-9034-06671e61ca44','3178a96e-a710-4859-b3ef-9713bf2c0632',60,'2024-09-26 18:48:45'),(46,'3178a96e-a710-4859-b3ef-9713bf2c0632','fbce757a-7da3-4093-9034-06671e61ca44',60,'2024-09-26 18:48:45'),(47,'fbce757a-7da3-4093-9034-06671e61ca44','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',30,'2024-09-26 18:48:45'),(48,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','fbce757a-7da3-4093-9034-06671e61ca44',30,'2024-09-26 18:48:45'),(49,'fbce757a-7da3-4093-9034-06671e61ca44','fbce757a-7da3-4093-9034-06671e61ca44',10,'2024-09-26 18:48:45'),(50,'8961157e-d6d5-4ea7-997c-f23a8232a19b','96e4c838-240b-446b-a758-a9e7f3890b34',80,'2024-09-26 18:49:10'),(51,'96e4c838-240b-446b-a758-a9e7f3890b34','8961157e-d6d5-4ea7-997c-f23a8232a19b',80,'2024-09-26 18:49:10'),(52,'8961157e-d6d5-4ea7-997c-f23a8232a19b','7d59b1d6-6803-482f-8e0f-55ad07f743e5',40,'2024-09-26 18:49:10'),(53,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','8961157e-d6d5-4ea7-997c-f23a8232a19b',40,'2024-09-26 18:49:10'),(54,'8961157e-d6d5-4ea7-997c-f23a8232a19b','01eba78e-7a6e-457a-a50f-295164749f0e',60,'2024-09-26 18:49:10'),(55,'01eba78e-7a6e-457a-a50f-295164749f0e','8961157e-d6d5-4ea7-997c-f23a8232a19b',60,'2024-09-26 18:49:10'),(56,'8961157e-d6d5-4ea7-997c-f23a8232a19b','4482755b-2096-4ce0-b1ed-23dbd286deac',50,'2024-09-26 18:49:10'),(57,'4482755b-2096-4ce0-b1ed-23dbd286deac','8961157e-d6d5-4ea7-997c-f23a8232a19b',50,'2024-09-26 18:49:10'),(58,'8961157e-d6d5-4ea7-997c-f23a8232a19b','3178a96e-a710-4859-b3ef-9713bf2c0632',80,'2024-09-26 18:49:10'),(59,'3178a96e-a710-4859-b3ef-9713bf2c0632','8961157e-d6d5-4ea7-997c-f23a8232a19b',80,'2024-09-26 18:49:10'),(60,'8961157e-d6d5-4ea7-997c-f23a8232a19b','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',60,'2024-09-26 18:49:10'),(61,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','8961157e-d6d5-4ea7-997c-f23a8232a19b',60,'2024-09-26 18:49:10'),(62,'8961157e-d6d5-4ea7-997c-f23a8232a19b','fbce757a-7da3-4093-9034-06671e61ca44',90,'2024-09-26 18:49:10'),(63,'fbce757a-7da3-4093-9034-06671e61ca44','8961157e-d6d5-4ea7-997c-f23a8232a19b',90,'2024-09-26 18:49:10'),(64,'8961157e-d6d5-4ea7-997c-f23a8232a19b','8961157e-d6d5-4ea7-997c-f23a8232a19b',10,'2024-09-26 18:49:10'),(65,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','96e4c838-240b-446b-a758-a9e7f3890b34',40,'2024-09-26 18:49:46'),(66,'96e4c838-240b-446b-a758-a9e7f3890b34','c8127afc-3e56-44e3-b942-b2640d7f7c7e',40,'2024-09-26 18:49:46'),(67,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','7d59b1d6-6803-482f-8e0f-55ad07f743e5',50,'2024-09-26 18:49:46'),(68,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','c8127afc-3e56-44e3-b942-b2640d7f7c7e',50,'2024-09-26 18:49:46'),(69,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','01eba78e-7a6e-457a-a50f-295164749f0e',30,'2024-09-26 18:49:46'),(70,'01eba78e-7a6e-457a-a50f-295164749f0e','c8127afc-3e56-44e3-b942-b2640d7f7c7e',30,'2024-09-26 18:49:46'),(71,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','4482755b-2096-4ce0-b1ed-23dbd286deac',40,'2024-09-26 18:49:46'),(72,'4482755b-2096-4ce0-b1ed-23dbd286deac','c8127afc-3e56-44e3-b942-b2640d7f7c7e',40,'2024-09-26 18:49:46'),(73,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','3178a96e-a710-4859-b3ef-9713bf2c0632',50,'2024-09-26 18:49:46'),(74,'3178a96e-a710-4859-b3ef-9713bf2c0632','c8127afc-3e56-44e3-b942-b2640d7f7c7e',50,'2024-09-26 18:49:46'),(75,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',30,'2024-09-26 18:49:46'),(76,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','c8127afc-3e56-44e3-b942-b2640d7f7c7e',30,'2024-09-26 18:49:46'),(77,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','fbce757a-7da3-4093-9034-06671e61ca44',60,'2024-09-26 18:49:46'),(78,'fbce757a-7da3-4093-9034-06671e61ca44','c8127afc-3e56-44e3-b942-b2640d7f7c7e',60,'2024-09-26 18:49:46'),(79,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','8961157e-d6d5-4ea7-997c-f23a8232a19b',60,'2024-09-26 18:49:46'),(80,'8961157e-d6d5-4ea7-997c-f23a8232a19b','c8127afc-3e56-44e3-b942-b2640d7f7c7e',60,'2024-09-26 18:49:46'),(81,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','c8127afc-3e56-44e3-b942-b2640d7f7c7e',10,'2024-09-26 18:49:46'),(82,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','96e4c838-240b-446b-a758-a9e7f3890b34',40,'2024-09-26 18:50:21'),(83,'96e4c838-240b-446b-a758-a9e7f3890b34','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',40,'2024-09-26 18:50:21'),(84,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','7d59b1d6-6803-482f-8e0f-55ad07f743e5',30,'2024-09-26 18:50:21'),(85,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',30,'2024-09-26 18:50:21'),(86,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','01eba78e-7a6e-457a-a50f-295164749f0e',30,'2024-09-26 18:50:21'),(87,'01eba78e-7a6e-457a-a50f-295164749f0e','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',30,'2024-09-26 18:50:21'),(88,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','4482755b-2096-4ce0-b1ed-23dbd286deac',50,'2024-09-26 18:50:21'),(89,'4482755b-2096-4ce0-b1ed-23dbd286deac','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',50,'2024-09-26 18:50:21'),(90,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','3178a96e-a710-4859-b3ef-9713bf2c0632',60,'2024-09-26 18:50:21'),(91,'3178a96e-a710-4859-b3ef-9713bf2c0632','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',60,'2024-09-26 18:50:21'),(92,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',20,'2024-09-26 18:50:21'),(93,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',20,'2024-09-26 18:50:21'),(94,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','fbce757a-7da3-4093-9034-06671e61ca44',10,'2024-09-26 18:50:21'),(95,'fbce757a-7da3-4093-9034-06671e61ca44','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',10,'2024-09-26 18:50:21'),(96,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','8961157e-d6d5-4ea7-997c-f23a8232a19b',10,'2024-09-26 18:50:21'),(97,'8961157e-d6d5-4ea7-997c-f23a8232a19b','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',10,'2024-09-26 18:50:21'),(98,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','c8127afc-3e56-44e3-b942-b2640d7f7c7e',10,'2024-09-26 18:50:21'),(99,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',10,'2024-09-26 18:50:21'),(100,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',10,'2024-09-26 18:50:21'),(101,'9e5543ea-4dbb-49a5-b97b-1579f0824215','96e4c838-240b-446b-a758-a9e7f3890b34',40,'2024-09-26 18:51:49'),(102,'96e4c838-240b-446b-a758-a9e7f3890b34','9e5543ea-4dbb-49a5-b97b-1579f0824215',40,'2024-09-26 18:51:49'),(103,'9e5543ea-4dbb-49a5-b97b-1579f0824215','7d59b1d6-6803-482f-8e0f-55ad07f743e5',60,'2024-09-26 18:51:49'),(104,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','9e5543ea-4dbb-49a5-b97b-1579f0824215',60,'2024-09-26 18:51:49'),(105,'9e5543ea-4dbb-49a5-b97b-1579f0824215','01eba78e-7a6e-457a-a50f-295164749f0e',70,'2024-09-26 18:51:49'),(106,'01eba78e-7a6e-457a-a50f-295164749f0e','9e5543ea-4dbb-49a5-b97b-1579f0824215',70,'2024-09-26 18:51:49'),(107,'9e5543ea-4dbb-49a5-b97b-1579f0824215','4482755b-2096-4ce0-b1ed-23dbd286deac',48,'2024-09-26 18:51:49'),(108,'4482755b-2096-4ce0-b1ed-23dbd286deac','9e5543ea-4dbb-49a5-b97b-1579f0824215',48,'2024-09-26 18:51:49'),(109,'9e5543ea-4dbb-49a5-b97b-1579f0824215','3178a96e-a710-4859-b3ef-9713bf2c0632',10,'2024-09-26 18:51:49'),(110,'3178a96e-a710-4859-b3ef-9713bf2c0632','9e5543ea-4dbb-49a5-b97b-1579f0824215',10,'2024-09-26 18:51:49'),(111,'9e5543ea-4dbb-49a5-b97b-1579f0824215','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',48,'2024-09-26 18:51:49'),(112,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','9e5543ea-4dbb-49a5-b97b-1579f0824215',48,'2024-09-26 18:51:49'),(113,'9e5543ea-4dbb-49a5-b97b-1579f0824215','fbce757a-7da3-4093-9034-06671e61ca44',57,'2024-09-26 18:51:49'),(114,'fbce757a-7da3-4093-9034-06671e61ca44','9e5543ea-4dbb-49a5-b97b-1579f0824215',57,'2024-09-26 18:51:49'),(115,'9e5543ea-4dbb-49a5-b97b-1579f0824215','8961157e-d6d5-4ea7-997c-f23a8232a19b',68,'2024-09-26 18:51:49'),(116,'8961157e-d6d5-4ea7-997c-f23a8232a19b','9e5543ea-4dbb-49a5-b97b-1579f0824215',68,'2024-09-26 18:51:49'),(117,'9e5543ea-4dbb-49a5-b97b-1579f0824215','c8127afc-3e56-44e3-b942-b2640d7f7c7e',48,'2024-09-26 18:51:49'),(118,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','9e5543ea-4dbb-49a5-b97b-1579f0824215',48,'2024-09-26 18:51:49'),(119,'9e5543ea-4dbb-49a5-b97b-1579f0824215','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',34,'2024-09-26 18:51:49'),(120,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','9e5543ea-4dbb-49a5-b97b-1579f0824215',34,'2024-09-26 18:51:49'),(121,'9e5543ea-4dbb-49a5-b97b-1579f0824215','9e5543ea-4dbb-49a5-b97b-1579f0824215',10,'2024-09-26 18:51:49'),(122,'2323d251-68bb-41b3-9c9b-442e567db6aa','96e4c838-240b-446b-a758-a9e7f3890b34',40,'2024-09-26 18:53:08'),(123,'96e4c838-240b-446b-a758-a9e7f3890b34','2323d251-68bb-41b3-9c9b-442e567db6aa',40,'2024-09-26 18:53:08'),(124,'2323d251-68bb-41b3-9c9b-442e567db6aa','7d59b1d6-6803-482f-8e0f-55ad07f743e5',30,'2024-09-26 18:53:08'),(125,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','2323d251-68bb-41b3-9c9b-442e567db6aa',30,'2024-09-26 18:53:08'),(126,'2323d251-68bb-41b3-9c9b-442e567db6aa','01eba78e-7a6e-457a-a50f-295164749f0e',58,'2024-09-26 18:53:08'),(127,'01eba78e-7a6e-457a-a50f-295164749f0e','2323d251-68bb-41b3-9c9b-442e567db6aa',58,'2024-09-26 18:53:08'),(128,'2323d251-68bb-41b3-9c9b-442e567db6aa','4482755b-2096-4ce0-b1ed-23dbd286deac',43,'2024-09-26 18:53:08'),(129,'4482755b-2096-4ce0-b1ed-23dbd286deac','2323d251-68bb-41b3-9c9b-442e567db6aa',43,'2024-09-26 18:53:08'),(130,'2323d251-68bb-41b3-9c9b-442e567db6aa','3178a96e-a710-4859-b3ef-9713bf2c0632',10,'2024-09-26 18:53:08'),(131,'3178a96e-a710-4859-b3ef-9713bf2c0632','2323d251-68bb-41b3-9c9b-442e567db6aa',10,'2024-09-26 18:53:08'),(132,'2323d251-68bb-41b3-9c9b-442e567db6aa','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',43,'2024-09-26 18:53:08'),(133,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','2323d251-68bb-41b3-9c9b-442e567db6aa',43,'2024-09-26 18:53:08'),(134,'2323d251-68bb-41b3-9c9b-442e567db6aa','fbce757a-7da3-4093-9034-06671e61ca44',85,'2024-09-26 18:53:08'),(135,'fbce757a-7da3-4093-9034-06671e61ca44','2323d251-68bb-41b3-9c9b-442e567db6aa',85,'2024-09-26 18:53:08'),(136,'2323d251-68bb-41b3-9c9b-442e567db6aa','8961157e-d6d5-4ea7-997c-f23a8232a19b',89,'2024-09-26 18:53:08'),(137,'8961157e-d6d5-4ea7-997c-f23a8232a19b','2323d251-68bb-41b3-9c9b-442e567db6aa',89,'2024-09-26 18:53:08'),(138,'2323d251-68bb-41b3-9c9b-442e567db6aa','c8127afc-3e56-44e3-b942-b2640d7f7c7e',20,'2024-09-26 18:53:08'),(139,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','2323d251-68bb-41b3-9c9b-442e567db6aa',20,'2024-09-26 18:53:08'),(140,'2323d251-68bb-41b3-9c9b-442e567db6aa','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',20,'2024-09-26 18:53:08'),(141,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','2323d251-68bb-41b3-9c9b-442e567db6aa',20,'2024-09-26 18:53:08'),(142,'2323d251-68bb-41b3-9c9b-442e567db6aa','9e5543ea-4dbb-49a5-b97b-1579f0824215',10,'2024-09-26 18:53:08'),(143,'9e5543ea-4dbb-49a5-b97b-1579f0824215','2323d251-68bb-41b3-9c9b-442e567db6aa',10,'2024-09-26 18:53:08'),(144,'2323d251-68bb-41b3-9c9b-442e567db6aa','2323d251-68bb-41b3-9c9b-442e567db6aa',10,'2024-09-26 18:53:08'),(145,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','96e4c838-240b-446b-a758-a9e7f3890b34',20,'2024-09-26 18:54:01'),(146,'96e4c838-240b-446b-a758-a9e7f3890b34','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',20,'2024-09-26 18:54:01'),(147,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','7d59b1d6-6803-482f-8e0f-55ad07f743e5',50,'2024-09-26 18:54:01'),(148,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',50,'2024-09-26 18:54:01'),(149,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','01eba78e-7a6e-457a-a50f-295164749f0e',60,'2024-09-26 18:54:01'),(150,'01eba78e-7a6e-457a-a50f-295164749f0e','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',60,'2024-09-26 18:54:01'),(151,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','4482755b-2096-4ce0-b1ed-23dbd286deac',20,'2024-09-26 18:54:01'),(152,'4482755b-2096-4ce0-b1ed-23dbd286deac','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',20,'2024-09-26 18:54:01'),(153,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','3178a96e-a710-4859-b3ef-9713bf2c0632',40,'2024-09-26 18:54:01'),(154,'3178a96e-a710-4859-b3ef-9713bf2c0632','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',40,'2024-09-26 18:54:01'),(155,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',10,'2024-09-26 18:54:01'),(156,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',10,'2024-09-26 18:54:01'),(157,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','fbce757a-7da3-4093-9034-06671e61ca44',80,'2024-09-26 18:54:01'),(158,'fbce757a-7da3-4093-9034-06671e61ca44','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',80,'2024-09-26 18:54:01'),(159,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','8961157e-d6d5-4ea7-997c-f23a8232a19b',80,'2024-09-26 18:54:01'),(160,'8961157e-d6d5-4ea7-997c-f23a8232a19b','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',80,'2024-09-26 18:54:01'),(161,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','c8127afc-3e56-44e3-b942-b2640d7f7c7e',50,'2024-09-26 18:54:01'),(162,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',50,'2024-09-26 18:54:01'),(163,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',10,'2024-09-26 18:54:01'),(164,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',10,'2024-09-26 18:54:01'),(165,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','9e5543ea-4dbb-49a5-b97b-1579f0824215',40,'2024-09-26 18:54:01'),(166,'9e5543ea-4dbb-49a5-b97b-1579f0824215','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',40,'2024-09-26 18:54:01'),(167,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','2323d251-68bb-41b3-9c9b-442e567db6aa',40,'2024-09-26 18:54:01'),(168,'2323d251-68bb-41b3-9c9b-442e567db6aa','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',40,'2024-09-26 18:54:01'),(169,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',10,'2024-09-26 18:54:01'),(170,'d27cc52a-b1bd-4544-a694-72a46233cefb','96e4c838-240b-446b-a758-a9e7f3890b34',20,'2024-09-26 19:10:07'),(171,'96e4c838-240b-446b-a758-a9e7f3890b34','d27cc52a-b1bd-4544-a694-72a46233cefb',20,'2024-09-26 19:10:07'),(172,'d27cc52a-b1bd-4544-a694-72a46233cefb','7d59b1d6-6803-482f-8e0f-55ad07f743e5',50,'2024-09-26 19:10:07'),(173,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','d27cc52a-b1bd-4544-a694-72a46233cefb',50,'2024-09-26 19:10:07'),(174,'d27cc52a-b1bd-4544-a694-72a46233cefb','01eba78e-7a6e-457a-a50f-295164749f0e',40,'2024-09-26 19:10:07'),(175,'01eba78e-7a6e-457a-a50f-295164749f0e','d27cc52a-b1bd-4544-a694-72a46233cefb',40,'2024-09-26 19:10:07'),(176,'d27cc52a-b1bd-4544-a694-72a46233cefb','4482755b-2096-4ce0-b1ed-23dbd286deac',30,'2024-09-26 19:10:07'),(177,'4482755b-2096-4ce0-b1ed-23dbd286deac','d27cc52a-b1bd-4544-a694-72a46233cefb',30,'2024-09-26 19:10:07'),(178,'d27cc52a-b1bd-4544-a694-72a46233cefb','3178a96e-a710-4859-b3ef-9713bf2c0632',60,'2024-09-26 19:10:07'),(179,'3178a96e-a710-4859-b3ef-9713bf2c0632','d27cc52a-b1bd-4544-a694-72a46233cefb',60,'2024-09-26 19:10:07'),(180,'d27cc52a-b1bd-4544-a694-72a46233cefb','cfef1226-e2e4-4a6b-a04e-0cf02babba0f',20,'2024-09-26 19:10:07'),(181,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','d27cc52a-b1bd-4544-a694-72a46233cefb',20,'2024-09-26 19:10:07'),(182,'d27cc52a-b1bd-4544-a694-72a46233cefb','fbce757a-7da3-4093-9034-06671e61ca44',70,'2024-09-26 19:10:07'),(183,'fbce757a-7da3-4093-9034-06671e61ca44','d27cc52a-b1bd-4544-a694-72a46233cefb',70,'2024-09-26 19:10:07'),(184,'d27cc52a-b1bd-4544-a694-72a46233cefb','8961157e-d6d5-4ea7-997c-f23a8232a19b',50,'2024-09-26 19:10:07'),(185,'8961157e-d6d5-4ea7-997c-f23a8232a19b','d27cc52a-b1bd-4544-a694-72a46233cefb',50,'2024-09-26 19:10:07'),(186,'d27cc52a-b1bd-4544-a694-72a46233cefb','c8127afc-3e56-44e3-b942-b2640d7f7c7e',40,'2024-09-26 19:10:07'),(187,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','d27cc52a-b1bd-4544-a694-72a46233cefb',40,'2024-09-26 19:10:07'),(188,'d27cc52a-b1bd-4544-a694-72a46233cefb','e6f45e46-c180-43ba-b3f0-c17c7ef85b60',40,'2024-09-26 19:10:07'),(189,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','d27cc52a-b1bd-4544-a694-72a46233cefb',40,'2024-09-26 19:10:07'),(190,'d27cc52a-b1bd-4544-a694-72a46233cefb','9e5543ea-4dbb-49a5-b97b-1579f0824215',60,'2024-09-26 19:10:07'),(191,'9e5543ea-4dbb-49a5-b97b-1579f0824215','d27cc52a-b1bd-4544-a694-72a46233cefb',60,'2024-09-26 19:10:07'),(192,'d27cc52a-b1bd-4544-a694-72a46233cefb','2323d251-68bb-41b3-9c9b-442e567db6aa',69,'2024-09-26 19:10:07'),(193,'2323d251-68bb-41b3-9c9b-442e567db6aa','d27cc52a-b1bd-4544-a694-72a46233cefb',69,'2024-09-26 19:10:07'),(194,'d27cc52a-b1bd-4544-a694-72a46233cefb','ce48d2f9-4fa5-4639-87bf-0545f4cf2487',40,'2024-09-26 19:10:07'),(195,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','d27cc52a-b1bd-4544-a694-72a46233cefb',40,'2024-09-26 19:10:07'),(196,'d27cc52a-b1bd-4544-a694-72a46233cefb','d27cc52a-b1bd-4544-a694-72a46233cefb',10,'2024-09-26 19:10:07');
+/*!40000 ALTER TABLE `fare_stations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `routes`
+--
+
+DROP TABLE IF EXISTS `routes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `routes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `route_id` varchar(128) NOT NULL,
+  `route_name` varchar(32) NOT NULL,
+  `datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `route_id` (`route_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `routes`
+--
+
+LOCK TABLES `routes` WRITE;
+/*!40000 ALTER TABLE `routes` DISABLE KEYS */;
+INSERT INTO `routes` VALUES (1,'c1696b0f-6650-4d75-8fc3-124d79be8828','Red Line','2024-09-25 23:00:10'),(2,'ba8c085d-d4b7-46ba-9645-c358c4151e66','Yellow Line','2024-09-25 23:00:10'),(3,'6a523eb8-1e95-4c49-98ef-f09d1a137a07','Violet Line','2024-09-26 18:40:37'),(4,'4310de90-4517-41c7-8a63-a9cbe40f425c','Red Line','2024-09-26 18:44:11'),(5,'addb89a3-23c2-490b-9130-7dfc9ac5b214','Magenta Line','2024-09-26 18:45:25'),(6,'de2b88e8-4dee-42a3-90a3-aa97085c6d5d','Blue Line','2024-09-26 18:47:06'),(7,'4cf6b35a-cb13-45f6-98ad-7331103b4ad4','Pink Line','2024-09-26 19:08:57');
+/*!40000 ALTER TABLE `routes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `station_close_status`
+--
+
+DROP TABLE IF EXISTS `station_close_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `station_close_status` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `station_id` char(36) NOT NULL,
+  `status` int NOT NULL DEFAULT '1',
+  `reason` varchar(128) DEFAULT NULL,
+  `datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_scs_stat_id` (`station_id`),
+  CONSTRAINT `fk_scs_stat_id` FOREIGN KEY (`station_id`) REFERENCES `stations` (`station_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `station_close_status`
+--
+
+LOCK TABLES `station_close_status` WRITE;
+/*!40000 ALTER TABLE `station_close_status` DISABLE KEYS */;
+INSERT INTO `station_close_status` VALUES (1,'01eba78e-7a6e-457a-a50f-295164749f0e',1,NULL,'2024-09-25 23:00:10'),(2,'7d59b1d6-6803-482f-8e0f-55ad07f743e5',1,NULL,'2024-09-25 23:00:10'),(3,'96e4c838-240b-446b-a758-a9e7f3890b34',1,NULL,'2024-09-25 23:00:10'),(4,'4482755b-2096-4ce0-b1ed-23dbd286deac',1,NULL,'2024-09-26 18:42:32'),(5,'3178a96e-a710-4859-b3ef-9713bf2c0632',1,NULL,'2024-09-26 18:44:56'),(6,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f',1,NULL,'2024-09-26 18:46:21'),(7,'fbce757a-7da3-4093-9034-06671e61ca44',1,NULL,'2024-09-26 18:48:45'),(8,'8961157e-d6d5-4ea7-997c-f23a8232a19b',1,NULL,'2024-09-26 18:49:10'),(9,'c8127afc-3e56-44e3-b942-b2640d7f7c7e',1,NULL,'2024-09-26 18:49:46'),(10,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60',1,NULL,'2024-09-26 18:50:21'),(11,'9e5543ea-4dbb-49a5-b97b-1579f0824215',1,NULL,'2024-09-26 18:51:49'),(12,'2323d251-68bb-41b3-9c9b-442e567db6aa',1,NULL,'2024-09-26 18:53:08'),(13,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487',1,NULL,'2024-09-26 18:54:01'),(14,'d27cc52a-b1bd-4544-a694-72a46233cefb',1,NULL,'2024-09-26 19:10:07');
+/*!40000 ALTER TABLE `station_close_status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `stations`
+--
+
+DROP TABLE IF EXISTS `stations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `stations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `station_id` varchar(128) NOT NULL,
+  `station_name` varchar(64) NOT NULL,
+  `route_id` varchar(128) NOT NULL,
+  `datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `station_id` (`station_id`),
+  KEY `fk_stat_rt_id` (`route_id`),
+  CONSTRAINT `fk_stat_rt_id` FOREIGN KEY (`route_id`) REFERENCES `routes` (`route_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stations`
+--
+
+LOCK TABLES `stations` WRITE;
+/*!40000 ALTER TABLE `stations` DISABLE KEYS */;
+INSERT INTO `stations` VALUES (1,'96e4c838-240b-446b-a758-a9e7f3890b34','South Extenstion','c1696b0f-6650-4d75-8fc3-124d79be8828','2024-09-25 23:00:10'),(2,'7d59b1d6-6803-482f-8e0f-55ad07f743e5','Gokulpuri','c1696b0f-6650-4d75-8fc3-124d79be8828','2024-09-25 23:00:10'),(3,'01eba78e-7a6e-457a-a50f-295164749f0e','Dilshad Garden','ba8c085d-d4b7-46ba-9645-c358c4151e66','2024-09-25 23:00:10'),(4,'4482755b-2096-4ce0-b1ed-23dbd286deac','Moolchand','6a523eb8-1e95-4c49-98ef-f09d1a137a07','2024-09-26 18:41:47'),(5,'3178a96e-a710-4859-b3ef-9713bf2c0632','Kashmere gate','4310de90-4517-41c7-8a63-a9cbe40f425c','2024-09-26 18:44:47'),(6,'cfef1226-e2e4-4a6b-a04e-0cf02babba0f','Greater Kailash ','addb89a3-23c2-490b-9130-7dfc9ac5b214','2024-09-26 18:46:01'),(7,'fbce757a-7da3-4093-9034-06671e61ca44','Karole Bagh','de2b88e8-4dee-42a3-90a3-aa97085c6d5d','2024-09-26 18:48:31'),(8,'8961157e-d6d5-4ea7-997c-f23a8232a19b','Patel Nagar','de2b88e8-4dee-42a3-90a3-aa97085c6d5d','2024-09-26 18:48:59'),(9,'c8127afc-3e56-44e3-b942-b2640d7f7c7e','Central Secretariate','ba8c085d-d4b7-46ba-9645-c358c4151e66','2024-09-26 18:49:32'),(10,'e6f45e46-c180-43ba-b3f0-c17c7ef85b60','Hauz Khas','ba8c085d-d4b7-46ba-9645-c358c4151e66','2024-09-26 18:50:02'),(11,'9e5543ea-4dbb-49a5-b97b-1579f0824215','Kashmere Gate','6a523eb8-1e95-4c49-98ef-f09d1a137a07','2024-09-26 18:51:32'),(12,'2323d251-68bb-41b3-9c9b-442e567db6aa','Kashmere Gate','ba8c085d-d4b7-46ba-9645-c358c4151e66','2024-09-26 18:52:45'),(13,'ce48d2f9-4fa5-4639-87bf-0545f4cf2487','Hauz Khas','addb89a3-23c2-490b-9130-7dfc9ac5b214','2024-09-26 18:53:33'),(14,'d27cc52a-b1bd-4544-a694-72a46233cefb','Lajpat Nagar','4cf6b35a-cb13-45f6-98ad-7331103b4ad4','2024-09-26 19:09:25');
+/*!40000 ALTER TABLE `stations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tokens`
+--
+
+DROP TABLE IF EXISTS `tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tokens` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `token_id` char(36) NOT NULL,
+  `is_active` int NOT NULL DEFAULT '1',
+  `in_station` int NOT NULL DEFAULT '0',
+  `datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_update` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token_id` (`token_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tokens`
+--
+
+LOCK TABLES `tokens` WRITE;
+/*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
+INSERT INTO `tokens` VALUES (1,'501e9993-b9f9-4bf5-b58e-19b3433eb7fd',1,0,'2024-09-25 23:03:36',NULL),(2,'44c73a21-69f7-4e91-a5e9-b0cf5af9e0c8',1,0,'2024-09-25 23:06:04',NULL),(3,'034465d0-328b-429a-bca1-85bad83486ff',1,0,'2024-09-25 23:07:35',NULL),(4,'a4cc12ed-e55c-4ed2-88b3-287e88aaed95',0,0,'2024-09-25 23:11:03','2024-09-25 23:11:46'),(5,'381143a5-826e-40f3-8d78-66ae71b93c73',0,0,'2024-09-25 23:12:36','2024-09-25 23:13:22'),(6,'3cdc546a-9af6-4a74-95d4-3bbb0c01b5b3',0,0,'2024-09-26 06:00:08','2024-09-26 06:00:52'),(7,'2edfc224-b979-43aa-92e1-01d28dbccfad',0,0,'2024-09-26 18:26:01','2024-09-26 18:26:34'),(8,'d14d997c-c3d3-4efd-8145-65b1c7e9556c',1,0,'2024-09-26 19:07:04',NULL);
+/*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactions`
+--
+
+DROP TABLE IF EXISTS `transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transactions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `trans_id` char(36) NOT NULL,
+  `mode` varchar(16) NOT NULL,
+  `upi_id` varchar(36) DEFAULT NULL,
+  `card_no` varchar(4) DEFAULT NULL,
+  `card_exp` varchar(64) DEFAULT NULL,
+  `amount` float NOT NULL,
+  `datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `trans_id` (`trans_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions`
+--
+
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES (1,'57746225-68b9-45d1-9b6b-fc6861fa73d7','upi','123456789@paytm',NULL,NULL,42,'2024-09-25 23:03:36'),(2,'e949bf20-14ad-4d47-8b0c-bf01f14b0398','upi','1234567890@paytm',NULL,NULL,74,'2024-09-25 23:06:04'),(3,'f02ff2f6-b878-42ef-840b-c7a0d2c14f54','upi','1234567890@paytm',NULL,NULL,74,'2024-09-25 23:07:35'),(4,'9886c697-2c97-4a3b-bbf5-58504bc9ac84','upi','1234567890@paytm',NULL,NULL,74,'2024-09-25 23:09:23'),(5,'d32869b2-96d0-4de9-8c2e-d27582d323e2','upi','1234567890@paytm',NULL,NULL,74,'2024-09-25 23:11:03'),(6,'48ff2557-f606-4c3d-93da-c7f9f2e7c2a9','cash',NULL,NULL,NULL,74,'2024-09-25 23:12:36'),(7,'5d112505-b05d-4f90-83a5-7e382d3f379b','upi','123456@sdf',NULL,NULL,74,'2024-09-26 06:00:08'),(8,'2704bd7d-6479-4b58-bccc-9687183b6737','upi','askjh@skjhd',NULL,NULL,74,'2024-09-26 18:26:01'),(9,'1229ccfc-9795-4f98-a6b2-0cc94a338354','upi','askd@askld',NULL,NULL,200,'2024-09-26 18:30:13'),(10,'671fb3a5-c223-46ff-a41e-5f0cfec2486b','upi','xyz@upi',NULL,NULL,40,'2024-09-26 19:07:04'),(11,'b62244e4-e8e5-4547-b586-e3114a2882d5','cash',NULL,NULL,NULL,200,'2024-09-26 19:13:42'),(12,'715527d4-0611-4a77-9ff1-ce3f4b0cf000','netBanking',NULL,'','24/7',200,'2024-09-26 19:14:33');
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `role` int NOT NULL,
+  `is_active` int NOT NULL DEFAULT '1',
+  `datetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'admin','admin@mms.com','admin',0,1,'2024-09-25 23:00:10'),(2,'counter','counter@coiunnter.com','counter',1,1,'2024-09-26 18:29:33');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-09-26 23:10:46

@@ -1,5 +1,3 @@
-
-
 # important imports
 from ..functions import functions as fn
 from .Payment import Payment

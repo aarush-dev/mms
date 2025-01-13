@@ -1,10 +1,9 @@
-
-
 from base.functions import functions as fn
 
 # making function easily available
 get_runs = fn.get_runs_upto
-
+print(get_runs)
+input()
 def run():
 	try:
 		fn.firstThingsFirst()
@@ -20,4 +19,3 @@ def run():
 
 if fn.configs.__DEBUG__:
 	run()
-

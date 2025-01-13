@@ -1,0 +1,24 @@
+
+[ 2024-12-11 23:15:27.110563 ] FileNotFoundError: [Errno 2] No such file or directory: '/home/user/mms/lang/hi.json'
+
+Traceback (most recent call last):
+  File "/home/user/mms/mtms/src/mtms/__init__.py", line 9, in run
+    fn.firstThingsFirst()
+  File "/home/user/mms/mtms/src/mtms/base/functions/functions.py", line 508, in firstThingsFirst
+    lang_dict = setWorkingLang(False)
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/mms/mtms/src/mtms/base/functions/functions.py", line 410, in setWorkingLang
+    lang_file = open(configs.__LANG_PATH__ + '/' + opt + '.json', 'r', encoding = 'utf-8')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[ 2024-12-11 23:17:20.145424 ] FileNotFoundError: [Errno 2] No such file or directory: '/home/user/mms/mtms/src/mtms/initials/lang/hi.json'
+
+Traceback (most recent call last):
+  File "/home/user/mms/mtms/src/mtms/__init__.py", line 9, in run
+    fn.firstThingsFirst()
+  File "/home/user/mms/mtms/src/mtms/base/functions/functions.py", line 508, in firstThingsFirst
+    lang_dict = setWorkingLang(False)
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/mms/mtms/src/mtms/base/functions/functions.py", line 410, in setWorkingLang
+    lang_file = open(configs.__LANG_PATH__ + '/' + opt + '.json', 'r', encoding = 'utf-8')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
